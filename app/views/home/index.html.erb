@@ -1,2 +1,72 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="home pt-5">
+  <div class="user rounded-pill text-muted mb-3 d-flex justify-content-center align-items-center">
+    请登录
+  </div>
+  <h1 class="title text-center mb-0">Github Repositories Trending</h1>
+  <p class="description text-center text-muted">Last cache created on 2019/4/27 by Github API v3.</p>
+  <div class="trending">
+    <div class="head">
+      Repositories Trending
+    </div>
+    <ul class="item">
+      <li>
+        <div class="info">
+          <div class="rank">
+            <span class="font-weight-bold" title="Ranking 1">1</span>
+            <a href="#" target="_blank" title="996icu/996.ICU">kefranabg / readme-md-generator</a>
+          </div>
+          <div>
+            <span class="badge badge-light">
+              <span class="repo-color" style="background: #f1e05a"></span>
+              Rust
+            </span>
+            <span class="badge badge-light text-black-50">
+              <i class="fas fa-star"></i>
+              176
+            </span>
+            <span class="badge badge-light text-black-50">
+              <i class="fas fa-star"></i>
+              826 stars today
+            </span>
+          </div>
+          <div class="description">
+            CLI that generates beautiful README.md files
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="info">
+          <div class="rank">
+            <span class="font-weight-bold" title="Ranking 2">2</span>
+            <a href="#" target="_blank" title="996icu/996.ICU">kefranabg / readme-md-generator</a>
+          </div>
+          <div>
+            <span class="badge badge-light">
+              <span class="repo-color" style="background: #f1e05a"></span>
+              Rust
+            </span>
+            <span class="badge badge-light text-black-50">
+              <i class="fas fa-star"></i>
+              176
+            </span>
+            <span class="badge badge-light text-black-50">
+              <i class="fas fa-star"></i>
+              826 stars today
+            </span>
+          </div>
+          <div class="description">
+            CLI that generates beautiful README.md files
+          </div>
+        </div>
+      </li>
+
+    </ul>
+    <% @trending.each do |item| %>
+      <div class="d-none">
+        <p><%= item[:name] %></p>
+        <p><%= item[:desc] %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
