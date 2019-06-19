@@ -6,14 +6,16 @@
   <div class="main-section repo">
     <div class="head">
       You star
+      <div class="page position-absolute h-100 ">
+        <a href="#" class="button">Next</a>
+      </div>
     </div>
 
     <ul class="item">
-      <% @github_star.each_with_index do |item, index| %>
+      <% @github_star.each do |item| %>
         <li>
           <div class="info">
             <div class="rank">
-              <span class="font-weight-bold" title="Ranking <%= index + 1 %>"><%= index + 1 %></span>
               <a href="<%= item[:html_url] %>" target="_blank" title="<%= item[:link] %>"><%= item[:full_name] %></a>
             </div>
             <div>

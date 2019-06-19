@@ -45,7 +45,22 @@ module ApplicationHelper
   end
 
   def getStar
-    @github_star ||= getClient.starred
+    @github_star ||= getClient().starred
+    
+    # @github_client.last_response.rels
+    # @github_client.last_response.headers[:link]
+  end
+
+  def parseLink(link)
+    links = Hash.new
+    parts = link.split(',')
+    parts.each do |part, index|
+      section = part.split(';')
+      url = section[0][/<(.*)>/,1]
+      name = section[1][/rel="(.*)"/,1].to_sym
+      links[name] = url
+    end
+    return links
   end
 
 end

@@ -4,11 +4,13 @@
     <img src="<%= getUser().avatar_url %>" alt="" />
     </a>
   <% else %>
-    请登录
+    <a class="login text-center rounded-pill" href="/users/auth/github">请登录</a>
   <% end %>
 </div>
+<% if user_signed_in? %>
 <div class="actions text-center">
   <a href="/profile/star" class="badge badge-secondary cursor">
     Star
   </a>
 </div>
+<% end %>
