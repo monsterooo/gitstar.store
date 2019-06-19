@@ -2,6 +2,8 @@ class HomeController < ApplicationController
   include ApplicationHelper
 
   def index
-    @trending = trending('javascript')
+    @lang = params[:lang]
+    @language = [['CSS', 'css'], ['HTML', 'html']]
+    @trending = trending(@lang)
   end
 end

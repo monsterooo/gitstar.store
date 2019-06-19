@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require 'octokit'
 
 module ApplicationHelper
   def trending(lang)
@@ -12,13 +13,20 @@ module ApplicationHelper
     end
     doc = Nokogiri::HTML(open("https://github.com/trending/#{lang}?since=daily"))
     doc.css('.Box-row').each do |item|
-      link = item.css('h1 a')[0]['href'] # 项目链接
-      name = link.split('/')[-1]; # 项目名称
-      desc = item.css('.col-9.text-gray.my-1.pr-4').text
-      # p desc # \n 没有清除不过在网页解析中并无大碍
+      link = item.css('h1 a')[0]['href'][1..-1] # 项目链接
+      language = item.search('span[itemprop="programmingLanguage"]').text
+      desc = item.css('.col-9.text-gray.my-1.pr-4').text.strip
+      stars = item.css('.muted-link.d-inline-block.mr-3');
+      star_count = stars[0].children[-1].text.gsub(',', '').match(/[\d]+/).to_s
+      fork_count = stars[1].children[-1].text.match(/[\d]+/).to_s
+      star_today = item.css('.d-inline-block.float-sm-right').children[-1].text.match(/[\d]+/).to_s
+
       collection << {
         link: link,
-        name: name,
+        language: language,
+        star_count: star_count,
+        star_today: star_today,
+        fork_count: fork_count,
         desc: desc
       }
     end
@@ -27,4 +35,17 @@ module ApplicationHelper
     end
     collection
   end
+
+  def getClient
+    @github_client ||= Octokit::Client.new(:access_token => current_user.access_token)
+  end
+
+  def getUser
+    @github_user ||= getClient().user
+  end
+
+  def getStar
+    @github_star ||= getClient.starred
+  end
+
 end

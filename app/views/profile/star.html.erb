@@ -1,0 +1,37 @@
+<div class="profile pt-5">
+  <%= render 'shared/user_info' %>
+  <h1 class="title text-center mb-0 mt-2">You Github Stars</h1>
+  <p class="description text-center text-muted">在这里可以对你Star的项目增加自定义描述</p>
+
+  <div class="main-section repo">
+    <div class="head">
+      You star
+    </div>
+
+    <ul class="item">
+      <% @github_star.each_with_index do |item, index| %>
+        <li>
+          <div class="info">
+            <div class="rank">
+              <span class="font-weight-bold" title="Ranking <%= index + 1 %>"><%= index + 1 %></span>
+              <a href="<%= item[:html_url] %>" target="_blank" title="<%= item[:link] %>"><%= item[:full_name] %></a>
+            </div>
+            <div>
+              <span class="badge badge-light">
+                <span class="repo-color" style="background: #f1e05a"></span>
+                <%= item[:language] %>
+              </span>
+              <span class="badge badge-light text-black-50">
+                <i class="fas fa-star"></i>
+                <%= item[:stargazers_count] %>
+              </span>
+            </div>
+            <div class="description">
+              <%= item[:description] %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -66,3 +66,5 @@ gem "omniauth-github", "~> 1.3"
 gem "figaro", "~> 1.1"
 
 gem "nokogiri", "~> 1.10"
+
+gem "octokit", "~> 4.14"

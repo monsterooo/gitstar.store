@@ -1,72 +1,45 @@
 <div class="home pt-5">
-  <div class="user rounded-pill text-muted mb-3 d-flex justify-content-center align-items-center">
-    请登录
-  </div>
-  <h1 class="title text-center mb-0">Github Repositories Trending</h1>
-  <p class="description text-center text-muted">Last cache created on 2019/4/27 by Github API v3.</p>
-  <div class="trending">
+  <%= render 'shared/user_info' %>
+  <h1 class="title text-center mb-0 mt-2">Github Repositories Trending</h1>
+  <p class="description text-center text-muted">Last cache created on <%= DateTime.now.to_date.to_s %> by Github API v3.</p>
+  <div class="main-section repo">
     <div class="head">
       Repositories Trending
+      <div class="language" >
+        <select class="form-control form-control-sm" data-controller="trending-language">
+          <%= options_for_select(@language, @lang) %>
+        </select>
+      </div>
     </div>
     <ul class="item">
-      <li>
-        <div class="info">
-          <div class="rank">
-            <span class="font-weight-bold" title="Ranking 1">1</span>
-            <a href="#" target="_blank" title="996icu/996.ICU">kefranabg / readme-md-generator</a>
+      <% @trending.each_with_index do |item, index| %>
+        <li>
+          <div class="info">
+            <div class="rank">
+              <span class="font-weight-bold" title="Ranking <%= index + 1 %>"><%= index + 1 %></span>
+              <a href="https://github.com/<%= item[:link] %>" target="_blank" title="<%= item[:link] %>"><%= item[:link] %></a>
+            </div>
+            <div>
+              <span class="badge badge-light">
+                <span class="repo-color" style="background: #f1e05a"></span>
+                <%= item[:language] %>
+              </span>
+              <span class="badge badge-light text-black-50">
+                <i class="fas fa-star"></i>
+                <%= item[:star_count] %>
+              </span>
+              <span class="badge badge-light text-black-50">
+                <i class="fas fa-star"></i>
+                <%= item[:star_today] %> stars today
+              </span>
+            </div>
+            <div class="description">
+              <%= item[:desc] %>
+            </div>
           </div>
-          <div>
-            <span class="badge badge-light">
-              <span class="repo-color" style="background: #f1e05a"></span>
-              Rust
-            </span>
-            <span class="badge badge-light text-black-50">
-              <i class="fas fa-star"></i>
-              176
-            </span>
-            <span class="badge badge-light text-black-50">
-              <i class="fas fa-star"></i>
-              826 stars today
-            </span>
-          </div>
-          <div class="description">
-            CLI that generates beautiful README.md files
-          </div>
-        </div>
-      </li>
-
-      <li>
-        <div class="info">
-          <div class="rank">
-            <span class="font-weight-bold" title="Ranking 2">2</span>
-            <a href="#" target="_blank" title="996icu/996.ICU">kefranabg / readme-md-generator</a>
-          </div>
-          <div>
-            <span class="badge badge-light">
-              <span class="repo-color" style="background: #f1e05a"></span>
-              Rust
-            </span>
-            <span class="badge badge-light text-black-50">
-              <i class="fas fa-star"></i>
-              176
-            </span>
-            <span class="badge badge-light text-black-50">
-              <i class="fas fa-star"></i>
-              826 stars today
-            </span>
-          </div>
-          <div class="description">
-            CLI that generates beautiful README.md files
-          </div>
-        </div>
-      </li>
-
+        </li>
+      <% end %>
     </ul>
-    <% @trending.each do |item| %>
-      <div class="d-none">
-        <p><%= item[:name] %></p>
-        <p><%= item[:desc] %></p>
-      </div>
-    <% end %>
+    
   </div>
 </div>

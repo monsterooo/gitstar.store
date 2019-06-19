@@ -1,0 +1,14 @@
+<div class="user rounded-pill text-muted mb-3 d-flex justify-content-center align-items-center">
+  <% if user_signed_in? %>
+    <a href="/profile">
+    <img src="<%= getUser().avatar_url %>" alt="" />
+    </a>
+  <% else %>
+    请登录
+  <% end %>
+</div>
+<div class="actions text-center">
+  <a href="/profile/star" class="badge badge-secondary cursor">
+    Star
+  </a>
+</div>
