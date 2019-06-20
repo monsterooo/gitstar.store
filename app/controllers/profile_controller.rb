@@ -2,6 +2,7 @@ class ProfileController < ApplicationController
   include ApplicationHelper
 
   def star
-    getStar
+    page = params[:page]
+    getStar(page)
   end
 end

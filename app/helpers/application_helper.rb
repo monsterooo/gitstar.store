@@ -20,13 +20,15 @@ module ApplicationHelper
       star_count = stars[0].children[-1].text.gsub(',', '').match(/[\d]+/).to_s
       fork_count = stars[1].children[-1].text.match(/[\d]+/).to_s
       star_today = item.css('.d-inline-block.float-sm-right').children[-1].text.match(/[\d]+/).to_s
-
+      repo_color = item.at_css('.repo-language-color')
+      repo_color = repo_color ? repo_color['style'] : nil
       collection << {
         link: link,
         language: language,
         star_count: star_count,
         star_today: star_today,
         fork_count: fork_count,
+        repo_color: repo_color,
         desc: desc
       }
     end
@@ -44,11 +46,12 @@ module ApplicationHelper
     @github_user ||= getClient().user
   end
 
-  def getStar
-    @github_star ||= getClient().starred
-    
-    # @github_client.last_response.rels
-    # @github_client.last_response.headers[:link]
+  def getStar(page = 1)
+    @github_star ||= getClient().get("/user/starred?page=#{page}")
+    @github_star_link = parseLink(getClient().last_response.headers[:link])
+    @github_star_link.each do |key,val|
+      @github_star_link[key] = val[/page=(\d+)/, 1]
+    end
   end
 
   def parseLink(link)

@@ -7,7 +7,12 @@
     <div class="head">
       You star
       <div class="page position-absolute h-100 ">
-        <a href="#" class="button">Next</a>
+      <% if @github_star_link[:prev] %>
+          <a href="/profile/star?page=<%= @github_star_link[:prev] %>" class="button">Prev</a>
+        <% end %>
+        <% if @github_star_link[:next] %>
+          <a href="/profile/star?page=<%= @github_star_link[:next] %>" class="button">Next</a>
+        <% end %>
       </div>
     </div>
 
@@ -19,7 +24,7 @@
               <a href="<%= item[:html_url] %>" target="_blank" title="<%= item[:link] %>"><%= item[:full_name] %></a>
             </div>
             <div>
-              <span class="badge badge-light">
+              <span class="badge badge-light d-none">
                 <span class="repo-color" style="background: #f1e05a"></span>
                 <%= item[:language] %>
               </span>

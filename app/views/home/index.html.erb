@@ -20,10 +20,12 @@
               <a href="https://github.com/<%= item[:link] %>" target="_blank" title="<%= item[:link] %>"><%= item[:link] %></a>
             </div>
             <div>
-              <span class="badge badge-light">
-                <span class="repo-color" style="background: #f1e05a"></span>
-                <%= item[:language] %>
-              </span>
+              <% if item[:repo_color] %>
+                <span class="badge badge-light">
+                  <span class="repo-color" style="<%= item[:repo_color] %>"></span>
+                  <%= item[:language] %>
+                </span>
+              <% end %>
               <span class="badge badge-light text-black-50">
                 <i class="fas fa-star"></i>
                 <%= item[:star_count] %>
