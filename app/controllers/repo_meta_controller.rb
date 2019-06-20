@@ -1,4 +1,6 @@
 class RepoMetaController < ApplicationController
+  skip_forgery_protection :only => [:create]
+
   before_action :set_repo_metum, only: [:show, :edit, :update, :destroy]
 
   # GET /repo_meta
@@ -24,8 +26,12 @@ class RepoMetaController < ApplicationController
   # POST /repo_meta
   # POST /repo_meta.json
   def create
-    @repo_metum = RepoMetum.new(repo_metum_params)
-
+    @repo_metum = RepoMetum.findByRepo(current_user.id, params[:repo_metum][:repo_id])
+    if !@repo_metum
+      @repo_metum = RepoMetum.new(repo_metum_params) # 没有则创建
+    else
+      @repo_metum.update(repo_metum_params) # 存在则更新
+    end
     respond_to do |format|
       if @repo_metum.save
         format.html { redirect_to @repo_metum, notice: 'Repo metum was successfully created.' }
@@ -69,6 +75,6 @@ class RepoMetaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def repo_metum_params
-      params.require(:repo_metum).permit(:repo_id, :description, :user_id)
+      params.require(:repo_metum).permit(:repo_id, :description).merge({user_id: current_user.id})
     end
 end

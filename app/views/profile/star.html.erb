@@ -15,10 +15,9 @@
         <% end %>
       </div>
     </div>
-
     <ul class="item">
       <% @github_star.each do |item| %>
-        <li data-controller="star-description">
+        <li data-controller="star-description" data-star-description-repoid="<%= item[:id] %>">
           <div class="info">
             <div class="rank">
               <a href="<%= item[:html_url] %>" target="_blank" title="<%= item[:link] %>"><%= item[:full_name] %></a>
@@ -36,8 +35,9 @@
             <div class="description">
               <%= item[:description] %>
             </div>
-            <div class="custome-description">
-              <textarea placeholder="请输入自定义描述"></textarea>
+            <div class="description position-relative">
+              <p contenteditable="true" data-target="star-description.description"><%= RepoMetum.findByRepo(current_user.id, item[:id]).try(:description) %></p>
+              <textarea class="form-control w-100 d-none"  placeholder="请输入自定义描述"><%= RepoMetum.findByRepo(current_user.id, item[:id]).try(:description) %></textarea>
             </div>
           </div>
         </li>
