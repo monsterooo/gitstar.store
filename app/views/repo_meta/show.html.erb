@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Repo:</strong>
+  <%= @repo_metum.repo_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @repo_metum.description %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @repo_metum.user %>
+</p>
+
+<%= link_to 'Edit', edit_repo_metum_path(@repo_metum) %> |
+<%= link_to 'Back', repo_meta_path %>

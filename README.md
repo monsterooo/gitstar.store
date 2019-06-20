@@ -26,3 +26,6 @@
 
 * rails g migration AddColumnsToUsers provider uid # github auth
 * rails g migration AddAccessTokenToUsers access_token # access_token
+* rails g scaffold repo_meta repo_id:integer description:text user:references # repo_meta
+
+感谢[github-rank](https://github.com/jaywcjlove/github-rank)的ui界面

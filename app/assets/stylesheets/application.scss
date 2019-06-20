@@ -107,8 +107,21 @@ ul {
       transition: all .3s;
       border-bottom: 1px solid #d8d8d8;
 
+      .custome-description {
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+      }
       &:hover {
         background: rgba(255, 255, 255, 0.56);
+
+        .custome-description {
+          visibility: visible;
+          opacity: 1;
+          height: auto;
+          transition-delay: 0s;
+        }
       }
       &:last-child {
         border-bottom: transparent;

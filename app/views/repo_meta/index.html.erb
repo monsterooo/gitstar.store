@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Repo Meta</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Repo</th>
+      <th>Description</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @repo_meta.each do |repo_metum| %>
+      <tr>
+        <td><%= repo_metum.repo_id %></td>
+        <td><%= repo_metum.description %></td>
+        <td><%= repo_metum.user %></td>
+        <td><%= link_to 'Show', repo_metum %></td>
+        <td><%= link_to 'Edit', edit_repo_metum_path(repo_metum) %></td>
+        <td><%= link_to 'Destroy', repo_metum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Repo Metum', new_repo_metum_path %>

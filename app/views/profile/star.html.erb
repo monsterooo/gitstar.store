@@ -18,7 +18,7 @@
 
     <ul class="item">
       <% @github_star.each do |item| %>
-        <li>
+        <li data-controller="star-description">
           <div class="info">
             <div class="rank">
               <a href="<%= item[:html_url] %>" target="_blank" title="<%= item[:link] %>"><%= item[:full_name] %></a>
@@ -35,6 +35,9 @@
             </div>
             <div class="description">
               <%= item[:description] %>
+            </div>
+            <div class="custome-description">
+              <textarea placeholder="请输入自定义描述"></textarea>
             </div>
           </div>
         </li>
