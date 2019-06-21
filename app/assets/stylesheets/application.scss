@@ -58,7 +58,6 @@ ul {
   border-radius: 5px;
 }
 
-
 .repo {
   .head {
     background-color: #e2e2e2;
@@ -75,11 +74,11 @@ ul {
       right: 13px;
       top: 0;
       height: 100%;
+      padding-top: 6px;
 
       .form-control-sm {
         height: auto;
         font-size :14px;
-        margin-top: 4px;
         padding: 2px 4px;
         background-color: #efefef;
       }
@@ -107,8 +106,14 @@ ul {
       transition: all .3s;
       border-bottom: 1px solid #d8d8d8;
 
+      .custome-description p {
+        outline: none;
+      }
       &:hover {
         background: rgba(255, 255, 255, 0.56);
+        .custome-description p {
+          box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
       }
       &:last-child {
         border-bottom: transparent;
@@ -129,6 +134,12 @@ ul {
     }
   }
 }
+.footer {
+  i {
+    font-size: 24px;
+  }
+}
+
 .button {
   color: #fff;
   cursor: pointer;
@@ -140,7 +151,7 @@ ul {
   border-radius: 4px;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   
-  &:hover {
+  &:hover, &.current {
     color: #fff;
     text-decoration: none;
     background-color: #6c757d;

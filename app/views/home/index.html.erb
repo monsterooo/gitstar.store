@@ -2,11 +2,13 @@
   <%= render 'shared/user_info' %>
   <h1 class="title text-center mb-0 mt-2">Github Repositories Trending</h1>
   <p class="description text-center text-muted">Last cache created on <%= DateTime.now.to_date.to_s %> by Github API v3.</p>
-  <div class="main-section repo">
+  <div class="main-section repo" data-controller="trending" data-trending-since="<%= @since %>">
     <div class="head">
       Repositories Trending
       <div class="language" >
-        <select class="form-control form-control-sm" data-controller="trending-language">
+        <span class="button" data-target="trending.since" data-trending-origin="daily">Today</span>
+        <span class="button" data-target="trending.since" data-trending-origin="weekly">This week</span>
+        <select class="form-control form-control-sm d-inline-block w-auto" data-target="trending.language">
           <%= options_for_select(@language, @lang) %>
         </select>
       </div>
@@ -42,6 +44,7 @@
         </li>
       <% end %>
     </ul>
-    
   </div>
 </div>
+
+<%= render 'shared/footer' %>

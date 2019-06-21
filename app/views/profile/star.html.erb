@@ -35,9 +35,8 @@
             <div class="description">
               <%= item[:description] %>
             </div>
-            <div class="description position-relative">
+            <div class="description custome-description position-relative">
               <p contenteditable="true" data-target="star-description.description"><%= RepoMetum.findByRepo(current_user.id, item[:id]).try(:description) %></p>
-              <textarea class="form-control w-100 d-none"  placeholder="请输入自定义描述"><%= RepoMetum.findByRepo(current_user.id, item[:id]).try(:description) %></textarea>
             </div>
           </div>
         </li>
@@ -45,3 +44,5 @@
     </ul>
   </div>
 </div>
+
+<%= render 'shared/footer' %>

@@ -3,15 +3,15 @@ require 'open-uri'
 require 'octokit'
 
 module ApplicationHelper
-  def trending(lang)
+  def trending(lang, since)
     currentDate = DateTime.now.to_date.to_s
-    redisPath = "#{currentDate}-#{lang}"
+    redisPath = "#{currentDate}-#{lang}-#{since}"
     collection = []
 
     if defined?(ReadCache.redis) && ReadCache.redis.get(redisPath)
       return eval(ReadCache.redis.get(redisPath))
     end
-    doc = Nokogiri::HTML(open("https://github.com/trending/#{lang}?since=daily"))
+    doc = Nokogiri::HTML(open("https://github.com/trending/#{lang}?since=#{since}"))
     doc.css('.Box-row').each do |item|
       link = item.css('h1 a')[0]['href'][1..-1] # 项目链接
       language = item.search('span[itemprop="programmingLanguage"]').text
